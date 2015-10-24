@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackListFeed", "httphandler\BlackListFeed.csproj", "{78B4E699-5285-4E7D-849C-D67935BBD021}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlacklistNew", "BlacklistNew\BlacklistNew.csproj", "{B7175264-611C-4B89-8102-0F285476CC42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBlackList", "TestBlackList\TestBlackList.csproj", "{800CA050-9D24-4270-8FBF-2E49A7ECE3C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlackList", "BlackList\BlackList.csproj", "{F885BB1F-5289-479A-977C-1330404D7CAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78B4E699-5285-4E7D-849C-D67935BBD021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B4E699-5285-4E7D-849C-D67935BBD021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B4E699-5285-4E7D-849C-D67935BBD021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B4E699-5285-4E7D-849C-D67935BBD021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7175264-611C-4B89-8102-0F285476CC42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7175264-611C-4B89-8102-0F285476CC42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7175264-611C-4B89-8102-0F285476CC42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7175264-611C-4B89-8102-0F285476CC42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{800CA050-9D24-4270-8FBF-2E49A7ECE3C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{800CA050-9D24-4270-8FBF-2E49A7ECE3C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{800CA050-9D24-4270-8FBF-2E49A7ECE3C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{800CA050-9D24-4270-8FBF-2E49A7ECE3C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F885BB1F-5289-479A-977C-1330404D7CAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F885BB1F-5289-479A-977C-1330404D7CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F885BB1F-5289-479A-977C-1330404D7CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F885BB1F-5289-479A-977C-1330404D7CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45
+	EndGlobalSection
+EndGlobal
