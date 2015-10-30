@@ -25,6 +25,7 @@ namespace BlacklistNew
                 }
 
             }
+            Console.WriteLine("Extracting Ipset Database...");
             return BlackListDB;
         }
         internal void IPsetDB(FileInfo mfile)

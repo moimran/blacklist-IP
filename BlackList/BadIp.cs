@@ -16,6 +16,7 @@ namespace BlacklistNew
 
         public override Dictionary<string, List<KeyValuePair<string, List<string>>>> ExtractIP()
         {
+            Console.WriteLine("Extracting BadIp Database...");
             return BadIpMain();
         }
         public static List<string> Get(string url)

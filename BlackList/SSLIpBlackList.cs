@@ -20,6 +20,7 @@ namespace BlacklistNew
                     SslBlackList(file);
                 }
             }
+            Console.WriteLine("Extracting SSL Black list...");
             return BlackListDB;
         }
 

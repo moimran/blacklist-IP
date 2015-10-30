@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.Concurrent;
 using Newtonsoft.Json;
 using System.Runtime.Serialization.Formatters;
+using System.IO;
 
 namespace BlacklistNew
 {
@@ -76,19 +77,24 @@ namespace BlacklistNew
             }
             Console.WriteLine("ToTal Number of BlackList IP's = {0}", BlackListUnique.Count());
             Console.WriteLine("ToTal Number of duplicates IP's Found = {0}", dup.Count());
-            foreach (KeyValuePair<string, List<KeyValuePair<string, List<string>>>> item in BlackListUnique)
+            using (StreamWriter sw = File.CreateText("blacklistDB.csv"))
             {
-                Console.WriteLine("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
-                string ip = item.Key;
-                Console.WriteLine("IP = {0}", ip);
-                for (int i = 0; i < item.Value.Count; i++)
+                Console.WriteLine("Writing to File....");
+                foreach (KeyValuePair<string, List<KeyValuePair<string, List<string>>>> item in BlackListUnique)
                 {
-                    Console.WriteLine("{0}", item.Value.ElementAt(i).Key);
-                    foreach (var item2 in item.Value.ElementAt(i).Value)
+                    string ip = item.Key;
+                    //Console.WriteLine("IP = {0}", ip);
+                    for (int i = 0; i < item.Value.Count; i++)
                     {
-                        Console.WriteLine(item2);
+                        //Console.WriteLine("{0}", item.Value.ElementAt(i).Key);
+                        foreach (var item2 in item.Value.ElementAt(i).Value)
+                        {
+                            //Console.WriteLine(item2);
+                            sw.WriteLine("{0},{1},{2}", ip, item.Value.ElementAt(i).Key, item2);
+                        }
                     }
                 }
+
             }
         }
 
@@ -101,28 +107,26 @@ namespace BlacklistNew
         }
         private static void DbShow(IExtractor shunDb)
         {
-            //Console.WriteLine(shunDb.BlackListDB.Count());
-            //Console.WriteLine(shunDb.totalip.Count());
-            //Console.WriteLine(shunDb.totalip.Distinct().Count());
+            
+            using (StreamWriter sw = File.CreateText("blacklistDB.csv"))
+            {
+
+           
             foreach (KeyValuePair<string, List<KeyValuePair<string, List<string>>>> item in shunDb.BlackListDB)
             {
-                Console.WriteLine("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
                 string ip = item.Key;
-                Console.WriteLine("IP = {0}", ip);
+                //Console.WriteLine("IP = {0}", ip);
                 for (int i = 0; i < item.Value.Count; i++)
                 {
-                    Console.WriteLine("{0}", item.Value.ElementAt(i).Key);
+                    //Console.WriteLine("{0}", item.Value.ElementAt(i).Key);
                     foreach (var item2 in item.Value.ElementAt(i).Value)
                     {
-                        Console.WriteLine(item2);
+                        //Console.WriteLine(item2);
+                        sw.WriteLine("{0},{1},{2}",ip, item.Value.ElementAt(i).Key, item2);
                     }
                 }
-                //string json = JsonConvert.SerializeObject(item, Formatting.Indented, new JsonSerializerSettings
-                //{
-                //    TypeNameHandling = TypeNameHandling.All,
-                ////    TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple
-                //});
-                //Console.WriteLine(json);
+            }
+
             }
         }
 

@@ -23,6 +23,7 @@ namespace BlacklistNew
                 }
 
             }
+            Console.WriteLine("Extracting BlockList.de list...");
             return BlackListDB;
         }
 

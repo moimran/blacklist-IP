@@ -21,6 +21,7 @@ namespace BlacklistNew
                     shunIps(file);
                 }
             }
+            Console.WriteLine("Extracting Shun list...");
             return BlackListDB;
         }
 
