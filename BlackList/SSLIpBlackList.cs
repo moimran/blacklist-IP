@@ -17,7 +17,6 @@ namespace BlacklistNew
             {
                 if (file.ToString().Contains("sslipblacklist.csv"))
                 {
-                    Console.WriteLine(file.ToString());
                     SslBlackList(file);
                 }
             }

@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using Newtonsoft.Json;
+using System.Runtime.Serialization.Formatters;
+
 namespace BlacklistNew
 {
     internal class Feeder
@@ -11,24 +14,24 @@ namespace BlacklistNew
         List<Dictionary<string, List<KeyValuePair<string, List<string>>>>> BlackListFull = new List<Dictionary<string, List<KeyValuePair<string, List<string>>>>>();
         Dictionary<string, List<KeyValuePair<string, List<string>>>> BlackListUnique = new Dictionary<string, List<KeyValuePair<string, List<string>>>>();
         internal List<IExtractor> FeedList = new List<IExtractor>();
-        List<string> dup=new List<string>();
+        List<string> dup = new List<string>();
         Ipset Ipsetdb = new Ipset();
         ShunList shunDb = new ShunList();
         BlockList_de BlockDb = new BlockList_de();
         SSLIpBlackList ccList = new SSLIpBlackList();
-
+        BadIp badip = new BadIp();
         public void Runner()
         {
             FeedList.Add(Ipsetdb);
             FeedList.Add(shunDb);
             FeedList.Add(BlockDb);
             FeedList.Add(ccList);
+            FeedList.Add(badip);
             foreach (IExtractor item in FeedList)
             {
                 feeds(item);
-                DbShow(item);
+                //DbShow(item);
             }
-            Console.WriteLine("---{0}", BlackListFull.Count);
             Analysis();
         }
 
@@ -47,50 +50,33 @@ namespace BlacklistNew
                     else
                     {
                         dup.Add(ip);
-                            for (int i = 0; i < item.Value.Count; i++)
+                        for (int i = 0; i < item.Value.Count; i++)
+                        {
+                            foreach (var item2 in item.Value.ElementAt(i).Value)
                             {
-                                Console.WriteLine("{0}", item.Value.ElementAt(i).Key);
-                                foreach (var item2 in item.Value.ElementAt(i).Value)
+                                List<KeyValuePair<string, List<string>>> data = BlackListUnique[ip];
+                                foreach (KeyValuePair<string, List<string>> item3 in data)
                                 {
-                                    List<KeyValuePair<string, List<string>>> data=BlackListUnique[ip];
-                                    foreach (KeyValuePair<string, List<string>> item3 in data)
+                                    if (item.Value.ElementAt(i).Key == item3.Key)
                                     {
-                                        if (item.Value.ElementAt(i).Key == item3.Key)
+                                        if (!item3.Value.Contains(item2))
                                         {
-                                            Console.WriteLine("{0}", item3.Key);
-                                            if (!item3.Value.Contains(item2))
-                                            {
-                                                item3.Value.Add(item2);
-                                                Console.WriteLine(item2);
-                                            }
-
+                                            item3.Value.Add(item2);
                                         }
+
                                     }
                                 }
                             }
+                        }
                     }
 
 
                 }
 
             }
-            Console.WriteLine(BlackListUnique.Count());
-            Console.WriteLine(dup.Count());
-        }
-
-
-        public void feeds(IExtractor obj)
-        {
-            Dictionary<string, List<KeyValuePair<string, List<string>>>> temp = obj.ExtractIP();
-            BlackListFull.Add(temp);
-
-        }
-        private static void DbShow(IExtractor shunDb)
-        {
-            Console.WriteLine(shunDb.BlackListDB.Count());
-            Console.WriteLine(shunDb.totalip.Count());
-            Console.WriteLine(shunDb.totalip.Distinct().Count());
-            foreach (KeyValuePair<string, List<KeyValuePair<string, List<string>>>> item in shunDb.BlackListDB)
+            Console.WriteLine("ToTal Number of BlackList IP's = {0}", BlackListUnique.Count());
+            Console.WriteLine("ToTal Number of duplicates IP's Found = {0}", dup.Count());
+            foreach (KeyValuePair<string, List<KeyValuePair<string, List<string>>>> item in BlackListUnique)
             {
                 Console.WriteLine("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
                 string ip = item.Key;
@@ -107,5 +93,40 @@ namespace BlacklistNew
         }
 
 
+        public void feeds(IExtractor obj)
+        {
+            Dictionary<string, List<KeyValuePair<string, List<string>>>> temp = obj.ExtractIP();
+            BlackListFull.Add(temp);
+
+        }
+        private static void DbShow(IExtractor shunDb)
+        {
+            //Console.WriteLine(shunDb.BlackListDB.Count());
+            //Console.WriteLine(shunDb.totalip.Count());
+            //Console.WriteLine(shunDb.totalip.Distinct().Count());
+            foreach (KeyValuePair<string, List<KeyValuePair<string, List<string>>>> item in shunDb.BlackListDB)
+            {
+                Console.WriteLine("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+                string ip = item.Key;
+                Console.WriteLine("IP = {0}", ip);
+                for (int i = 0; i < item.Value.Count; i++)
+                {
+                    Console.WriteLine("{0}", item.Value.ElementAt(i).Key);
+                    foreach (var item2 in item.Value.ElementAt(i).Value)
+                    {
+                        Console.WriteLine(item2);
+                    }
+                }
+                //string json = JsonConvert.SerializeObject(item, Formatting.Indented, new JsonSerializerSettings
+                //{
+                //    TypeNameHandling = TypeNameHandling.All,
+                ////    TypeNameAssemblyFormat = FormatterAssemblyStyle.Simple
+                //});
+                //Console.WriteLine(json);
+            }
+        }
+
+
     }
 }
+
