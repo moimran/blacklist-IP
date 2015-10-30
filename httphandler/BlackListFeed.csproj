@@ -45,12 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="APiHadler.cs" />
-    <Compile Include="badips.cs" />
     <Compile Include="BlackListFeeds.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="FileWatcher.cs" />
-    <Compile Include="IpExtractor.cs" />
     <Compile Include="MultipleFeeds.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
