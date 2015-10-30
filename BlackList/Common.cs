@@ -24,9 +24,11 @@ namespace BlacklistNew
 
         internal static string GetPath()
         {
-            string appPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            //appPath= appPath+"/files/";
-            appPath = @"C:\Users\moimran\Documents\Visual Studio 2013\Projects\httphandler\httphandler\bin\Debug\files\";
+            string appPath = System.IO.Directory.GetCurrentDirectory();
+            string[] p = appPath.Split('\\');
+            p = p.Take(p.Count() - 3).ToArray();
+            appPath = string.Join("\\", p);
+            appPath = appPath + "/Database/";
             return appPath;
         }
 

@@ -12,26 +12,22 @@ namespace BlackListFeed
     {
         static void Main(string[] args)
         {
-            string s = System.IO.Directory.GetCurrentDirectory();
-            Console.WriteLine(s);
-
             //------------------File download-------------------------
-            //List<string> UrlList = new List<string>();
-            //List<string> Honeypot=new List<string>();
-            //using (StreamReader reader = new StreamReader("blackList.conf"))
-            //{
-            //    while (!reader.EndOfStream)
-            //    {
-            //        string line = reader.ReadLine();
-            //        if (line != null)
-            //        {
-            //            UrlList.Add(line.Trim());
-            //        }
-            //    }
-
-            //}
-            //MultipleFeeds feeds = new MultipleFeeds(UrlList);
-            //feeds.StartTasks();
+            List<string> UrlList = new List<string>();
+            List<string> Honeypot=new List<string>();
+            using (StreamReader reader = new StreamReader("blackList.conf"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    if (line != null)
+                    {
+                        UrlList.Add(line.Trim());
+                    }
+                }
+            }
+            MultipleFeeds feeds = new MultipleFeeds(UrlList);
+            feeds.StartTasks();
             //---------------------File watcher----------------------
             //FileWatcher watch = new FileWatcher(path);
             //watch.CreateFileWatcher();

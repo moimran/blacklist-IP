@@ -24,8 +24,11 @@ namespace BlackListFeed
 
         internal static string GetPath()
         {
-            string appPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            appPath= appPath+"/files/";
+            string appPath = System.IO.Directory.GetCurrentDirectory();
+            string[] p = appPath.Split('\\');
+            p = p.Take(p.Count() - 3).ToArray();
+            appPath = string.Join("\\", p);
+            appPath = appPath + "/Database/";
             return appPath;
         }
 
