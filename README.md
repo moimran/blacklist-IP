@@ -7,10 +7,13 @@ The program maintains a dictionary with IP address as key.Values define the sour
 If an IP address is seen in multiple resource it will maintain the list of resource, If an IP is seen in multiple categories 
 then it maintain the list of all categories.
 
+#Usage
+
+First run BlackListFeed which would download all the relevant files from the inernet.
+Then run BlackList which would extract information from the files. The balcklist also has a class which uses BadIp's APi to download blacklist IP.
 
 
-
-	
+#Resources	
 http://support.clean-mx.de/clean-mx/xmlviruses.php?	
 http://autoshun.org/files/shunlist.csv	The input from your logs will be used to identify hostile address that are bots, worms, spam engines which we use to build a shun list for your firewall so that you block the attackers before they enter into your network!
 	
